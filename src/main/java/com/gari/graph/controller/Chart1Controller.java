@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.URL;
@@ -155,9 +156,25 @@ public class Chart1Controller implements Initializable {
     // Parse Data for Charts
     private void updateChartData(int synchroSeconds, LineChart<String, Number> chart, String jsonDataPoints, Function<TemporaryPoint, Number> parameter, Double tickValue) {
 
+        if (StringUtils.isBlank(jsonDataPoints)) {
+            log.error("Json Data is EMPTY");
+            return;
+        }
+
         PointsData pointsData = getPointsDataFromJson(jsonDataPoints);
+
+        if (Objects.isNull(pointsData)) {
+            log.error("PointsData not converted");
+            return;
+        }
+
         List<TemporaryPoint> simPoints = pointsData.getSimPoints();
         List<TemporaryPoint> realPoints = pointsData.getRealPoints();
+
+        if (CollectionUtils.isEmpty(simPoints) || CollectionUtils.isEmpty(realPoints)) {
+            log.error("Some of Points Data is Empty [SIM or REAL]");
+            return;
+        }
 
         // Little synchronize
         TemporaryPoint firstSimPoint = simPoints.get(0);
