@@ -12,9 +12,9 @@ import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -67,8 +67,44 @@ public class Chart1Controller implements Initializable {
     @FXML
     private Button clearButton;
 
+    @FXML
+    private AnchorPane rootPane;
+
+    @FXML
+    private Pane mainPane;
+
+    @FXML
+    private TabPane tabPane;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        double baseWidth = 1905;
+        double baseHeight = 995;
+
+//        rootPane.setStyle("-fx-background-color: red");
+//        mainPane.setStyle("-fx-background-color: blue");
+//
+        rootPane.widthProperty().addListener((obs, oldVal, newVal) -> {
+            double newValDouble = (double) newVal;
+            double scaleX = newValDouble/baseWidth;
+//            log.info("WIDTH = {}  Scale = {}   {}  {}", newValDouble, scaleX, mainPane.getLayoutX(), mainPane.getPrefWidth());
+            mainPane.setScaleX(scaleX);
+            mainPane.setTranslateX((newValDouble - baseWidth)*(scaleX/2));
+        });
+
+        rootPane.heightProperty().addListener((obs, oldVal, newVal) -> {
+            double newValDouble = (double) newVal;
+            double scaleY = newValDouble/baseHeight;
+//            log.info("HEIGHT = {}  Scale = {}", newValDouble, scaleY);
+            mainPane.setScaleY(scaleY);
+            mainPane.setTranslateY((newValDouble - baseHeight)*(scaleY/2));
+        });
+
+
+        tabPane.prefWidthProperty().bind(mainPane.prefWidthProperty().multiply(1.07));
+//        tabPane.prefHeightProperty().bind(mainPane.prefHeightProperty().multiply(1.07));
+
 
         // Init List of Charts
         charts = Arrays.asList(altChart, latChart, longChart, vSpeedChart, hSpeedChart, courseChart, pitchChart, rollChart, batteryChart);

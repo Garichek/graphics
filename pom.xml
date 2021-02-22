@@ -90,20 +90,45 @@
             <type>pom</type>
         </dependency>
 
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>11</version>
+            <classifier>mac</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>11</version>
+            <classifier>mac</classifier>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-controls -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>16-ea+4</version>
+            <classifier>win</classifier>
         </dependency>
-
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>16-ea+4</version>
+            <classifier>mac</classifier>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>16-ea+4</version>
+            <classifier>win</classifier>
         </dependency>
-
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>16-ea+4</version>
+            <classifier>mac</classifier>
+        </dependency>
 
     </dependencies>
 
@@ -157,6 +182,14 @@
                 </executions>
             </plugin>
 <!--            <plugin>-->
+<!--                <groupId>org.openjfx</groupId>-->
+<!--                <artifactId>javafx-maven-plugin</artifactId>-->
+<!--                <version>0.0.5</version>-->
+<!--                <configuration>-->
+<!--                    <mainClass>com.gari.graph.GraphApp</mainClass>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--            <plugin>-->
 <!--                <artifactId>maven-jar-plugin</artifactId>-->
 <!--                <version>${jar.plugin.version}</version>-->
 <!--                <configuration>-->
@@ -173,6 +206,9 @@
 <!--                    </archive>-->
 <!--                </configuration>-->
 <!--            </plugin>-->
+
+
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>

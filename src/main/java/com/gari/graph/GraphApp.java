@@ -31,8 +31,16 @@ public class GraphApp extends Application {
         Scene scene = new Scene(root, r.getWidth(), r.getHeight() - 100);
 
         stage.setScene(scene);
-
         stage.setTitle("Telemetry Analyzer");
+
+        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+
+        //set Stage boundaries to visible bounds of the main screen
+        stage.setX(primaryScreenBounds.getMinX());
+        stage.setY(primaryScreenBounds.getMinY());
+        stage.setWidth(primaryScreenBounds.getWidth());
+        stage.setHeight(primaryScreenBounds.getHeight());
+
         stage.show();
     }
 }
