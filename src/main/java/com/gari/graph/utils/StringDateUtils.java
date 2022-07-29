@@ -19,7 +19,6 @@ public class StringDateUtils {
     // , "yyyy-MMM-dd'T'HH:mm:ss.SSSZZZZZ", "yyyy-MMM-dd'T'HH:mm:ssZZZZZ"
 
     public static OffsetDateTime parseDateTimeString(String value) {
-
         if (checkValue(value) == null) {
             return null;
         }
